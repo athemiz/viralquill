@@ -721,7 +721,7 @@
 <div class="hero">
   <div class="hero-badge"><span class="dot"></span> Experiment Report — Feb 2026</div>
   <h1>Sistema Multi-Agente<br>Autonomo no Slack</h1>
-  <p>4 agentes de IA coordenando-se em tempo real para construir o ViralQuill — um app de conteudo viral para X/Twitter. 9 horas. 150 milhoes de tokens. Zero dolares.</p>
+  <p>4 agentes de IA coordenando-se em tempo real para construir o ViralQuill — um app de conteudo viral para X/Twitter. 9 horas. 150 milhoes de tokens. ~$673 em consumo de API.</p>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="num" data-count="4">0</div>
@@ -736,8 +736,8 @@
       <div class="label">Duracao</div>
     </div>
     <div class="hero-stat">
-      <div class="num" data-prefix="$" data-count="0">$0</div>
-      <div class="label">Custo Real</div>
+      <div class="num" data-prefix="~$" data-count="673">0</div>
+      <div class="label">Custo API</div>
     </div>
     <div class="hero-stat">
       <div class="num" data-count="13700">0</div>
@@ -929,7 +929,7 @@
 <section id="tokens">
   <div class="section-label">Secao 03 — Consumo de Tokens</div>
   <h2 class="fade-in">150 Milhoes de Tokens em 9 Horas</h2>
-  <p class="section-desc fade-in">Breakdown completo do consumo. Se fossem cobrados via API direta da Anthropic, o custo seria ~$673. Com Cursor subscription: $0.</p>
+  <p class="section-desc fade-in">Breakdown completo do consumo. Custo estimado via precos de API da Anthropic: ~$673 em 9 horas.</p>
 
   <div class="cards-grid cards-2 fade-in">
     <div class="card">
@@ -960,17 +960,12 @@
 
     <div class="card">
       <h3>Custo Teorico por Modelo</h3>
-      <p style="font-size:0.75rem;color:var(--text3);margin-bottom:1rem;">Precos API Anthropic (se nao fosse incluido no Cursor)</p>
+      <p style="font-size:0.75rem;color:var(--text3);margin-bottom:1rem;">Precos API Anthropic (com prompt caching)</p>
       <div>
         <div class="cost-row">
           <div class="cost-model"><div class="cost-dot" style="background:var(--red);"></div>Opus 4.6 (thinking)</div>
-          <div class="cost-bar-bg"><div class="cost-bar-fill" data-width="77" style="background:var(--red);"></div></div>
-          <div class="cost-value" style="color:var(--red);">$521</div>
-        </div>
-        <div class="cost-row">
-          <div class="cost-model"><div class="cost-dot" style="background:var(--amber);"></div>Opus 4.6 (max)</div>
-          <div class="cost-bar-bg"><div class="cost-bar-fill" data-width="16" style="background:var(--amber);"></div></div>
-          <div class="cost-value" style="color:var(--amber);">$108</div>
+          <div class="cost-bar-bg"><div class="cost-bar-fill" data-width="93" style="background:var(--red);"></div></div>
+          <div class="cost-value" style="color:var(--red);">$629</div>
         </div>
         <div class="cost-row">
           <div class="cost-model"><div class="cost-dot" style="background:var(--accent);"></div>Sonnet 4.5 (thinking)</div>
@@ -992,8 +987,8 @@
   </div>
 
   <div class="savings-highlight fade-in">
-    <div class="saved">$673 → $0</div>
-    <div class="saved-label">100% incluso na subscription do Cursor — custo real zero</div>
+    <div class="saved" style="color:var(--red);">~$673</div>
+    <div class="saved-label">Custo estimado de 9 horas de operacao com 4 agentes</div>
     <p style="font-size:0.75rem;color:var(--text3);margin-top:0.75rem;">94 chamadas com Opus 4.6 excederam 200k tokens de input (long context premium)</p>
   </div>
 </section>
@@ -1259,27 +1254,23 @@
 <section id="conclusion" style="text-align:center;">
   <div class="section-label">Secao 07 — Conclusao Principal</div>
   <h2 class="fade-in" style="max-width:800px;margin:0 auto 1rem;">Multi-Agent e <span style="color:var(--red);">Proibitivamente Caro</span></h2>
-  <p class="section-desc fade-in" style="margin:0 auto 2.5rem;max-width:700px;">A maior conclusao do experimento: a arquitetura multi-agente, na forma atual, e economicamente inviavel sem subsidio (como a subscription do Cursor).</p>
+  <p class="section-desc fade-in" style="margin:0 auto 2.5rem;max-width:700px;">A maior conclusao do experimento: a arquitetura multi-agente, na forma atual, e economicamente inviavel para a maioria dos casos de uso.</p>
 
   <!-- Model callout -->
   <div class="card fade-in" style="margin-bottom:2rem;background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(245,158,11,0.05));border-color:rgba(239,68,68,0.2);text-align:left;">
     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="font-size:2.5rem;">⚠️</div>
       <div style="flex:1;min-width:250px;">
-        <h3 style="color:var(--red);margin-bottom:0.25rem;">O modelo usado foi o Claude Opus 4.6 (max-thinking)</h3>
-        <p style="font-size:0.9rem;color:var(--text2);margin-bottom:0.5rem;">O modelo <strong style="color:var(--text);">mais caro e mais poderoso</strong> da Anthropic — e o principal motivo do custo absurdo. Este e um modelo de raciocinio profundo com thinking tokens, pensado para tarefas complexas, nao para heartbeats de rotina.</p>
+        <h3 style="color:var(--red);margin-bottom:0.25rem;">O modelo usado foi o Claude Opus 4.6 (thinking) com 200k de contexto</h3>
+        <p style="font-size:0.9rem;color:var(--text2);margin-bottom:0.5rem;">O modelo <strong style="color:var(--text);">mais caro e mais poderoso</strong> da Anthropic — e o principal motivo do custo absurdo. Modelo de raciocinio profundo com thinking tokens e 200k de contexto, pensado para tarefas complexas, nao para heartbeats de rotina.</p>
         <div style="display:flex;gap:1.5rem;flex-wrap:wrap;font-size:0.8rem;margin-top:0.75rem;">
           <div style="padding:0.5rem 1rem;background:rgba(239,68,68,0.1);border-radius:8px;border:1px solid rgba(239,68,68,0.2);">
-            <div style="color:var(--red);font-weight:700;font-size:1.1rem;">$521.30</div>
-            <div style="color:var(--text3);">Opus 4.6 thinking (77%)</div>
-          </div>
-          <div style="padding:0.5rem 1rem;background:rgba(245,158,11,0.1);border-radius:8px;border:1px solid rgba(245,158,11,0.2);">
-            <div style="color:var(--amber);font-weight:700;font-size:1.1rem;">$108.21</div>
-            <div style="color:var(--text3);">Opus 4.6 max (16%)</div>
+            <div style="color:var(--red);font-weight:700;font-size:1.1rem;">$629</div>
+            <div style="color:var(--text3);">Opus 4.6 thinking (93%)</div>
           </div>
           <div style="padding:0.5rem 1rem;background:rgba(99,102,241,0.1);border-radius:8px;border:1px solid rgba(99,102,241,0.2);">
-            <div style="color:var(--accent3);font-weight:700;font-size:1.1rem;">$42.08</div>
-            <div style="color:var(--text3);">Sonnet 4.5 (6%)</div>
+            <div style="color:var(--accent3);font-weight:700;font-size:1.1rem;">$42</div>
+            <div style="color:var(--text3);">Sonnet 4.5 thinking (6%)</div>
           </div>
           <div style="padding:0.5rem 1rem;background:rgba(34,197,94,0.1);border-radius:8px;border:1px solid rgba(34,197,94,0.2);">
             <div style="color:var(--green);font-weight:700;font-size:1.1rem;">$1.64</div>
@@ -1300,10 +1291,10 @@
       </div>
       <div class="sep"></div>
       <div style="font-size:0.85rem;color:var(--text2);line-height:1.8;">
-        <div style="display:flex;justify-content:space-between;"><span>Modelo principal:</span><span style="color:var(--red);font-weight:700;">Opus 4.6 max-thinking</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Modelo principal:</span><span style="color:var(--red);font-weight:700;">Opus 4.6 thinking (200k ctx)</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Custo API direta:</span><span style="color:var(--red);font-weight:700;">~$673/dia</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Projecao mensal (8h/dia):</span><span style="color:var(--red);font-weight:700;">~$20,190/mes</span></div>
-        <div style="display:flex;justify-content:space-between;"><span>Custo real (Cursor sub):</span><span style="color:var(--green);font-weight:700;">$0</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Custo/hora:</span><span style="color:var(--red);font-weight:700;">~$75/hora</span></div>
       </div>
     </div>
     <div class="card" style="background:linear-gradient(135deg,rgba(239,68,68,0.05),rgba(139,92,246,0.05));border-color:rgba(139,92,246,0.15);">
@@ -1360,7 +1351,7 @@
         <li>Coder produziu codigo real e funcional: 13,700 linhas, 139 testes, deploy no Vercel</li>
         <li>Heartbeats como motor de proatividade — agentes agem sem ser perguntados</li>
         <li>Docker isolamento garante independencia de estado entre agentes</li>
-        <li>Custo zero via Cursor subscription — 150M tokens que custariam ~$673</li>
+        <li>Documentacao de alta qualidade produzida autonomamente — 42 arquivos, ~14,000 linhas</li>
       </ul>
     </div>
     <div class="verdict-card bad">

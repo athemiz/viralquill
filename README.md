@@ -1,46 +1,36 @@
-# ViralQuill
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-AI-powered viral content optimizer for X (Twitter). Rewrite and optimize your posts to match what the platform algorithm rewards.
+## Getting Started
 
-## Vision
+First, run the development server:
 
-Help content creators post viral content on X (Twitter) by analyzing algorithm signals, rewriting posts for maximum engagement, and predicting performance before publishing.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Core Features (planned)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- **Algorithm-Aware Scoring** - Pre-publish engagement prediction using open-sourced algorithm weights
-- **AI Content Rewriting** - Optimize tone, hooks, formatting, and thread structure
-- **Engagement Prediction** - Score posts before publishing with confidence intervals
-- **Optimal Timing** - Recommend best posting windows based on audience data
-- **Thread Optimizer** - Structure multi-post threads for maximum completion rates
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Tech Stack (recommended by research)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-| Layer | Technology | Rationale |
-|-------|-----------|-----------|
-| Frontend | Next.js 15 + React + TypeScript | Industry standard SaaS 2026 |
-| UI | Tailwind + shadcn/ui | Fast dev, consistent design |
-| Backend | Next.js API + Supabase | Unified TS codebase |
-| Database | Supabase (PostgreSQL) | Auth, realtime, RLS |
-| AI Primary | OpenAI GPT-4o | Best creative writing quality |
-| Embeddings | text-embedding-3-small | Viral tweet similarity search |
-| Vector DB | Supabase pgvector | Same Postgres instance |
-| Auth | Supabase Auth + X OAuth | Built-in + social login |
-| Hosting | Vercel | Seamless Next.js deployment |
-| Payments | Stripe | Subscription management |
+## Learn More
 
-## Key Differentiator
+To learn more about Next.js, take a look at the following resources:
 
-No competitor uses the open-sourced X algorithm weights to score posts before publishing. This is our primary technical moat.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Status
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-**Phase**: Research complete, backlog structuring in progress.
+## Deploy on Vercel
 
-## Team
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Built by [Athemiz](https://github.com/athemiz) with an AI agent team.
-
-## License
-
-TBD
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

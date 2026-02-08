@@ -72,7 +72,7 @@ If these signals are present, you can score up to +0.5 higher on fluency/tone if
 ## Output Format
 
 Provide JSON response:
-```json
+\`\`\`json
 {
   "grammar": 4,
   "grammar_justification": "Clear writing with one minor typo that doesn't affect meaning.",
@@ -85,7 +85,7 @@ Provide JSON response:
   "algorithm_signals_present": ["strong_hook", "question", "line_breaks"],
   "suggestions": []
 }
-```
+\`\`\`
 
 Note: overall = average of three dimensions, can be decimal.
 

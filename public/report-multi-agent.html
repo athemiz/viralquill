@@ -711,6 +711,7 @@
     <li><a href="#tokens">Tokens</a></li>
     <li><a href="#results">Resultados</a></li>
     <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#conclusion">Custo</a></li>
     <li><a href="#verdict">Veredito</a></li>
   </ul>
 </nav>
@@ -1096,9 +1097,70 @@
   </div>
 </section>
 
+<!-- ═══════════ MAIN CONCLUSION ═══════════ -->
+<section id="conclusion" style="text-align:center;">
+  <div class="section-label">Secao 06 — Conclusao Principal</div>
+  <h2 class="fade-in" style="max-width:800px;margin:0 auto 1rem;">Multi-Agent e <span style="color:var(--red);">Proibitivamente Caro</span></h2>
+  <p class="section-desc fade-in" style="margin:0 auto 2.5rem;max-width:700px;">A maior conclusao do experimento: a arquitetura multi-agente, na forma atual, e economicamente inviavel sem subsidio (como a subscription do Cursor).</p>
+
+  <div class="cards-grid cards-2 fade-in">
+    <div class="card" style="background:linear-gradient(135deg,rgba(239,68,68,0.05),rgba(245,158,11,0.05));border-color:rgba(239,68,68,0.15);">
+      <h3 style="color:var(--red);">O Que Aconteceu</h3>
+      <div class="big-number" style="padding:1rem;">
+        <div class="value" style="color:var(--red);">150M<span class="unit">tokens</span></div>
+        <div class="sub">em apenas 9 horas com 4 agentes</div>
+      </div>
+      <div class="sep"></div>
+      <div style="font-size:0.85rem;color:var(--text2);line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span>Custo API direta:</span><span style="color:var(--red);font-weight:700;">~$673/dia</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Projecao mensal (8h/dia):</span><span style="color:var(--red);font-weight:700;">~$20,190/mes</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Custo real (Cursor sub):</span><span style="color:var(--green);font-weight:700;">$0</span></div>
+      </div>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,rgba(239,68,68,0.05),rgba(139,92,246,0.05));border-color:rgba(139,92,246,0.15);">
+      <h3 style="color:var(--amber);">Team of Teams (Nao Testado)</h3>
+      <p style="font-size:0.85rem;color:var(--text2);margin-bottom:1rem;">O plano original era 3 times (Otavio, Bruno, Valmir), cada um com 4 agentes. Os primos nao criaram seus times, mas a projecao e alarmante:</p>
+      <div style="font-size:0.85rem;color:var(--text2);line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span>Agentes totais:</span><span style="font-weight:700;">12 (3x4)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Tokens/dia estimado:</span><span style="color:var(--red);font-weight:700;">~450M</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Custo/dia API:</span><span style="color:var(--red);font-weight:700;">~$2,019</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Custo/mes API:</span><span style="color:var(--red);font-weight:700;">~$60,570</span></div>
+      </div>
+      <div class="sep"></div>
+      <p style="font-size:0.75rem;color:var(--text3);font-style:italic;">+ coordenacao cross-team multiplicaria o overhead de mensagens</p>
+    </div>
+  </div>
+
+  <div class="card fade-in" style="margin-top:1.5rem;text-align:left;">
+    <h3>Por Que e Tao Caro?</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem;">
+      <div style="padding:1rem;background:rgba(255,255,255,0.02);border-radius:10px;">
+        <div style="font-size:1.3rem;margin-bottom:0.5rem;">🔄</div>
+        <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Heartbeats Constantes</div>
+        <div style="font-size:0.78rem;color:var(--text2);">Cada heartbeat (a cada 5min) recarrega TODOS os workspace files no contexto. 4 agentes x 12 heartbeats/hora = 48 ciclos LLM/hora.</div>
+      </div>
+      <div style="padding:1rem;background:rgba(255,255,255,0.02);border-radius:10px;">
+        <div style="font-size:1.3rem;margin-bottom:0.5rem;">💬</div>
+        <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Loops de Mensagem</div>
+        <div style="font-size:0.78rem;color:var(--text2);">Agente A posta, B responde, A reage, C comenta. Cada mensagem e um novo ciclo completo de LLM com todo o contexto.</div>
+      </div>
+      <div style="padding:1rem;background:rgba(255,255,255,0.02);border-radius:10px;">
+        <div style="font-size:1.3rem;margin-bottom:0.5rem;">📚</div>
+        <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Long Context Premium</div>
+        <div style="font-size:0.78rem;color:var(--text2);">94 chamadas com Opus 4.6 excederam 200k tokens de input, entrando na tarifa premium de long context da Anthropic.</div>
+      </div>
+      <div style="padding:1rem;background:rgba(255,255,255,0.02);border-radius:10px;">
+        <div style="font-size:1.3rem;margin-bottom:0.5rem;">🧠</div>
+        <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.25rem;">Modelos Caros por Default</div>
+        <div style="font-size:0.78rem;color:var(--text2);">77% do custo veio de Opus 4.6 thinking ($521). So 0.24% veio de Haiku ($1.64). A escolha de modelo importa 300x.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ VERDICT ═══════════ -->
 <section id="verdict">
-  <div class="section-label">Secao 06 — Veredito</div>
+  <div class="section-label">Secao 07 — Veredito</div>
   <h2 class="fade-in">O Que Funcionou vs O Que Nao</h2>
 
   <div class="verdict-grid fade-in">

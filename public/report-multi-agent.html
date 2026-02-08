@@ -710,6 +710,7 @@
     <li><a href="#agents">Agentes</a></li>
     <li><a href="#tokens">Tokens</a></li>
     <li><a href="#results">Resultados</a></li>
+    <li><a href="#docs">Docs</a></li>
     <li><a href="#timeline">Timeline</a></li>
     <li><a href="#conclusion">Custo</a></li>
     <li><a href="#verdict">Veredito</a></li>
@@ -1037,10 +1038,167 @@
   </div>
 </section>
 
+<!-- ═══════════ DOCUMENTATION ═══════════ -->
+<section id="docs">
+  <div class="section-label">Secao 05 — Documentacao Produzida</div>
+  <h2 class="fade-in">42 Arquivos, ~14.000 Linhas de Docs</h2>
+  <p class="section-desc fade-in">Um dos pontos mais brilhantes do experimento. Os agentes produziram documentacao de alta qualidade autonomamente — research reports, design docs, architecture decisions, e quality frameworks.</p>
+
+  <div class="cards-grid cards-4 fade-in" style="margin-bottom:1.5rem;">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2.2rem;font-weight:900;color:var(--accent3);">6</div>
+      <div style="font-size:0.75rem;color:var(--text3);">Research Reports</div>
+      <div style="font-size:0.65rem;color:var(--text3);margin-top:0.15rem;">1,303 linhas</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2.2rem;font-weight:900;color:var(--green);">24</div>
+      <div style="font-size:0.75rem;color:var(--text3);">Agent Workspace Files</div>
+      <div style="font-size:0.65rem;color:var(--text3);margin-top:0.15rem;">4 agentes x 6 docs</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2.2rem;font-weight:900;color:var(--cyan);">3</div>
+      <div style="font-size:0.75rem;color:var(--text3);">Architecture / Design Docs</div>
+      <div style="font-size:0.65rem;color:var(--text3);margin-top:0.15rem;">578 linhas</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2.2rem;font-weight:900;color:var(--amber);">3</div>
+      <div style="font-size:0.75rem;color:var(--text3);">Infra / Docker Configs</div>
+      <div style="font-size:0.65rem;color:var(--text3);margin-top:0.15rem;">350 linhas</div>
+    </div>
+  </div>
+
+  <!-- Research Reports -->
+  <div class="card fade-in" style="margin-bottom:1rem;">
+    <h3 style="display:flex;align-items:center;gap:0.5rem;"><span style="font-size:1.2rem;">🔬</span> Research Reports <span style="font-size:0.7rem;color:var(--text3);font-weight:400;">(produzidos pelo Researcher Agent)</span></h3>
+    <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">424 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">viral-content-app-deep-research.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Pesquisa completa: algoritmo do X/Twitter, padroes virais, analise de concorrentes, tecnicas NLP, capacidades da API, consideracoes legais, tech stack, naming do app</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">264 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">revision-v2-changes.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Revisao da pesquisa apos feedback do QA: precificacao pay-per-use, baseline de embedding models, corroboracao texto vs video, schema de database</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">184 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">R003-x-algorithm-deep-dive.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Deep dive no algoritmo do X: pipeline de 3 estagios, multiplicadores de engajamento, sinais negativos, tipos de conteudo</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">158 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">R003-addendum-embedding-models.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Comparacao de modelos de embedding: OpenAI vs Gemini vs Cohere — custo, performance, recomendacao para ViralQuill</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">142 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">R003-addendum-api-rate-limits.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Rate limits da API X v2: tiers de precificacao, limites por endpoint, implicacoes para estrategia de caching</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+        <span class="commit-hash" style="min-width:55px;text-align:center;">131 ln</span>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;">R004-competitive-landscape.md</div>
+          <div style="font-size:0.75rem;color:var(--text2);">Analise competitiva: TweetHunter, Hypefury, Typefully — feature gap analysis, posicionamento de mercado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture & Design -->
+  <div class="cards-grid cards-2 fade-in">
+    <div class="card">
+      <h3 style="display:flex;align-items:center;gap:0.5rem;"><span style="font-size:1.2rem;">📐</span> Architecture & Design Docs</h3>
+      <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+          <span class="commit-hash" style="min-width:55px;text-align:center;">369 ln</span>
+          <div>
+            <div style="font-size:0.85rem;font-weight:600;">IMPL-007-supabase-design.md</div>
+            <div style="font-size:0.73rem;color:var(--text2);">Supabase migration design: auth flow, schema (8 tabelas), RLS policies, caching, migration plan</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+          <span class="commit-hash" style="min-width:55px;text-align:center;">209 ln</span>
+          <div>
+            <div style="font-size:0.85rem;font-weight:600;">002-caching-design.md</div>
+            <div style="font-size:0.73rem;color:var(--text2);">Cache layer design: stale-while-revalidate, batch reads, X API rate limit handling</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:8px;background:rgba(255,255,255,0.02);">
+          <span class="commit-hash" style="min-width:55px;text-align:center;">188 ln</span>
+          <div>
+            <div style="font-size:0.85rem;font-weight:600;">IMPL-001-004-delivery.md</div>
+            <div style="font-size:0.73rem;color:var(--text2);">Delivery report fase 1: scaffolding, scoring engine, TypeScript types, LLM service layer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="display:flex;align-items:center;gap:0.5rem;"><span style="font-size:1.2rem;">🤖</span> Agent Identity System</h3>
+      <p style="font-size:0.8rem;color:var(--text2);margin:0.5rem 0;">Cada agente possui 6 arquivos de identidade, totalizando 24 documentos estruturados:</p>
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.5rem;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--accent);font-family:monospace;">SOUL.md</span><span style="color:var(--text3);">~80 ln/agente — principios, limites, estilo</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--accent);font-family:monospace;">HEARTBEAT.md</span><span style="color:var(--text3);">~100 ln/agente — acoes proativas, HALT</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--accent);font-family:monospace;">AGENTS.md</span><span style="color:var(--text3);">~108 ln/agente — canais, regras, workflow</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--accent);font-family:monospace;">TOOLS.md</span><span style="color:var(--text3);">~94 ln/agente — tools, IDs, mentions</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--accent);font-family:monospace;">IDENTITY.md</span><span style="color:var(--text3);">~14 ln/agente — nome, emoji, papel</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;padding:0.3rem 0;">
+          <span style="color:var(--accent);font-family:monospace;">USER.md</span><span style="color:var(--text3);">~38 ln/agente — time humano, estrutura</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QA quality metrics -->
+  <div class="card fade-in" style="margin-top:1rem;">
+    <h3 style="display:flex;align-items:center;gap:0.5rem;"><span style="font-size:1.2rem;">📊</span> Outros Documentos Notaveis</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:0.75rem;">
+      <div style="padding:0.75rem;background:rgba(255,255,255,0.02);border-radius:8px;">
+        <div style="font-weight:600;font-size:0.85rem;color:var(--amber);">quality-metrics-draft.md</div>
+        <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">107 linhas — Framework de metricas de qualidade produzido pelo QA: checklist de pesquisa, metricas de reescrita, acuracia de predicao de engajamento</div>
+      </div>
+      <div style="padding:0.75rem;background:rgba(255,255,255,0.02);border-radius:8px;">
+        <div style="font-weight:600;font-size:0.85rem;color:var(--cyan);">cursor-openai proxy</div>
+        <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">~7,680 linhas de codigo — Proxy completo com anti-poisoning, protobuf parsing, tool call routing, SSE streaming</div>
+      </div>
+      <div style="padding:0.75rem;background:rgba(255,255,255,0.02);border-radius:8px;">
+        <div style="font-weight:600;font-size:0.85rem;color:var(--green);">README.md (ViralQuill)</div>
+        <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">99 linhas — Visao do projeto, tech stack, getting started, pesos do algoritmo de scoring, fases do projeto</div>
+      </div>
+      <div style="padding:0.75rem;background:rgba(255,255,255,0.02);border-radius:8px;">
+        <div style="font-weight:600;font-size:0.85rem;color:var(--accent3);">Docker infra (3 files)</div>
+        <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">350 linhas — Dockerfile, docker-compose.yml, entrypoint.sh: toda a infra de containerizacao dos 4 agentes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ TIMELINE ═══════════ -->
 <section id="timeline">
-  <div class="section-label">Secao 05 — Problemas e Solucoes</div>
-  <h2 class="fade-in">10 Bugs, 10 Fixes</h2>
+  <div class="section-label">Secao 06 — Problemas e Solucoes</div>
+  <h2 class="fade-in">10 Bugs, 10 Solucoes</h2>
   <p class="section-desc fade-in">Cada problema encontrado ensinou algo sobre como orquestrar agentes autonomos. Aqui esta o timeline completo.</p>
 
   <div class="timeline fade-in">
@@ -1099,7 +1257,7 @@
 
 <!-- ═══════════ MAIN CONCLUSION ═══════════ -->
 <section id="conclusion" style="text-align:center;">
-  <div class="section-label">Secao 06 — Conclusao Principal</div>
+  <div class="section-label">Secao 07 — Conclusao Principal</div>
   <h2 class="fade-in" style="max-width:800px;margin:0 auto 1rem;">Multi-Agent e <span style="color:var(--red);">Proibitivamente Caro</span></h2>
   <p class="section-desc fade-in" style="margin:0 auto 2.5rem;max-width:700px;">A maior conclusao do experimento: a arquitetura multi-agente, na forma atual, e economicamente inviavel sem subsidio (como a subscription do Cursor).</p>
 
@@ -1191,7 +1349,7 @@
 
 <!-- ═══════════ VERDICT ═══════════ -->
 <section id="verdict">
-  <div class="section-label">Secao 07 — Veredito</div>
+  <div class="section-label">Secao 08 — Veredito</div>
   <h2 class="fade-in">O Que Funcionou vs O Que Nao</h2>
 
   <div class="verdict-grid fade-in">

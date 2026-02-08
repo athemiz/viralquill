@@ -1103,6 +1103,36 @@
   <h2 class="fade-in" style="max-width:800px;margin:0 auto 1rem;">Multi-Agent e <span style="color:var(--red);">Proibitivamente Caro</span></h2>
   <p class="section-desc fade-in" style="margin:0 auto 2.5rem;max-width:700px;">A maior conclusao do experimento: a arquitetura multi-agente, na forma atual, e economicamente inviavel sem subsidio (como a subscription do Cursor).</p>
 
+  <!-- Model callout -->
+  <div class="card fade-in" style="margin-bottom:2rem;background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(245,158,11,0.05));border-color:rgba(239,68,68,0.2);text-align:left;">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div style="font-size:2.5rem;">⚠️</div>
+      <div style="flex:1;min-width:250px;">
+        <h3 style="color:var(--red);margin-bottom:0.25rem;">O modelo usado foi o Claude Opus 4.6 (max-thinking)</h3>
+        <p style="font-size:0.9rem;color:var(--text2);margin-bottom:0.5rem;">O modelo <strong style="color:var(--text);">mais caro e mais poderoso</strong> da Anthropic — e o principal motivo do custo absurdo. Este e um modelo de raciocinio profundo com thinking tokens, pensado para tarefas complexas, nao para heartbeats de rotina.</p>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;font-size:0.8rem;margin-top:0.75rem;">
+          <div style="padding:0.5rem 1rem;background:rgba(239,68,68,0.1);border-radius:8px;border:1px solid rgba(239,68,68,0.2);">
+            <div style="color:var(--red);font-weight:700;font-size:1.1rem;">$521.30</div>
+            <div style="color:var(--text3);">Opus 4.6 thinking (77%)</div>
+          </div>
+          <div style="padding:0.5rem 1rem;background:rgba(245,158,11,0.1);border-radius:8px;border:1px solid rgba(245,158,11,0.2);">
+            <div style="color:var(--amber);font-weight:700;font-size:1.1rem;">$108.21</div>
+            <div style="color:var(--text3);">Opus 4.6 max (16%)</div>
+          </div>
+          <div style="padding:0.5rem 1rem;background:rgba(99,102,241,0.1);border-radius:8px;border:1px solid rgba(99,102,241,0.2);">
+            <div style="color:var(--accent3);font-weight:700;font-size:1.1rem;">$42.08</div>
+            <div style="color:var(--text3);">Sonnet 4.5 (6%)</div>
+          </div>
+          <div style="padding:0.5rem 1rem;background:rgba(34,197,94,0.1);border-radius:8px;border:1px solid rgba(34,197,94,0.2);">
+            <div style="color:var(--green);font-weight:700;font-size:1.1rem;">$1.64</div>
+            <div style="color:var(--text3);">Haiku 4.5 (0.24%)</div>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text3);margin-top:0.75rem;font-style:italic;">93% do custo veio dos modelos Opus. Se todo o experimento fosse feito com Haiku, o custo cairia de ~$673 para ~$2.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="cards-grid cards-2 fade-in">
     <div class="card" style="background:linear-gradient(135deg,rgba(239,68,68,0.05),rgba(245,158,11,0.05));border-color:rgba(239,68,68,0.15);">
       <h3 style="color:var(--red);">O Que Aconteceu</h3>
@@ -1112,6 +1142,7 @@
       </div>
       <div class="sep"></div>
       <div style="font-size:0.85rem;color:var(--text2);line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span>Modelo principal:</span><span style="color:var(--red);font-weight:700;">Opus 4.6 max-thinking</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Custo API direta:</span><span style="color:var(--red);font-weight:700;">~$673/dia</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Projecao mensal (8h/dia):</span><span style="color:var(--red);font-weight:700;">~$20,190/mes</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Custo real (Cursor sub):</span><span style="color:var(--green);font-weight:700;">$0</span></div>

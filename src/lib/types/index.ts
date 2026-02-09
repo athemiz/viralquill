@@ -53,13 +53,13 @@ export interface User {
 /** Algorithm weight configuration based on X Heavy Ranker open-source weights */
 export interface AlgorithmWeights {
   replyEngagedByAuthor: number; // 75 (150x like)
-  reply: number;                // 13.5
-  profileClickEngage: number;   // 12
-  conversationClick: number;    // 11
-  dwellTime2min: number;        // 10
-  bookmark: number;             // 10
-  retweet: number;              // 1 (20x like baseline)
-  like: number;                 // 0.5 (baseline)
+  reply: number; // 13.5
+  profileClickEngage: number; // 12
+  conversationClick: number; // 11
+  dwellTime2min: number; // 10
+  bookmark: number; // 10
+  retweet: number; // 1 (20x like baseline)
+  like: number; // 0.5 (baseline)
 }
 
 export type EngagementBucket = 'low' | 'medium' | 'high' | 'viral';
@@ -69,18 +69,18 @@ export type EngagementBucket = 'low' | 'medium' | 'high' | 'viral';
  * Per-creator when >= 50 posts, fallback to global.
  */
 export interface BucketThresholds {
-  low: number;    // < p25
+  low: number; // < p25
   medium: number; // p25 - p75
-  high: number;   // p75 - p95
-  viral: number;  // > p95
+  high: number; // p75 - p95
+  viral: number; // > p95
 }
 
 export interface AlgoScore {
-  raw: number;           // weighted composite score
-  normalized: number;    // 0-100 scale
+  raw: number; // weighted composite score
+  normalized: number; // 0-100 scale
   bucket: EngagementBucket;
   breakdown: ScoreBreakdown;
-  confidence: number;    // 0-1, based on data quality
+  confidence: number; // 0-1, based on data quality
 }
 
 export interface ScoreBreakdown {
@@ -115,7 +115,7 @@ export type ToneType =
 export interface RewriteResult {
   rewrittenText: string;
   predictedScore: AlgoScore;
-  changes: string[];       // human-readable list of changes made
+  changes: string[]; // human-readable list of changes made
   tone: ToneType;
   hookUsed?: string;
 }
@@ -123,10 +123,10 @@ export interface RewriteResult {
 // ─── LLM Judge (Quality Scoring) ────────────────────────────────────
 
 export interface JudgeResult {
-  grammar: number;    // 1-5 rubric
-  fluency: number;    // 1-5 rubric
-  tone: number;       // 1-5 rubric
-  overall: number;    // average
+  grammar: number; // 1-5 rubric
+  fluency: number; // 1-5 rubric
+  tone: number; // 1-5 rubric
+  overall: number; // average
   feedback: string;
 }
 
@@ -138,7 +138,7 @@ export interface ScheduledPost {
   content: string;
   scheduledAt: string; // ISO 8601
   status: 'draft' | 'scheduled' | 'posted' | 'failed';
-  tweetId?: string;    // populated after posting
+  tweetId?: string; // populated after posting
   predictedScore: AlgoScore;
   media?: MediaAttachment[];
 }
@@ -149,7 +149,7 @@ export interface PostAnalytics {
   tweetId: string;
   predictedScore: AlgoScore;
   actualMetrics: TweetMetrics;
-  accuracy: number;          // predicted vs actual deviation
+  accuracy: number; // predicted vs actual deviation
   collectedAt: string;
 }
 
@@ -182,7 +182,7 @@ export interface XApiConfig {
 export interface RateLimitState {
   endpoint: string;
   remaining: number;
-  resetAt: string;     // ISO 8601
+  resetAt: string; // ISO 8601
   limit: number;
   scope: 'app' | 'user';
 }

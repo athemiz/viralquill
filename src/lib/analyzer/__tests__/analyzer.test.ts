@@ -28,14 +28,14 @@ describe('analyzeContent', () => {
   // ─── Hook Detection ─────────────────────────────────────────
 
   it('detects problem-solution hook', () => {
-    const result = analyzeContent('Most people waste time on X. Here\'s the fix: do Y instead.');
+    const result = analyzeContent("Most people waste time on X. Here's the fix: do Y instead.");
     expect(result.hasHook).toBe(true);
     expect(result.hookType).toBe('problem-solution');
     expect(result.preOptimizationScore).toBeGreaterThan(50);
   });
 
   it('detects contrarian hook', () => {
-    const result = analyzeContent('Everyone says X is best. They\'re wrong. Here\'s why Y wins.');
+    const result = analyzeContent("Everyone says X is best. They're wrong. Here's why Y wins.");
     expect(result.hasHook).toBe(true);
     expect(result.hookType).toBe('contrarian');
   });
@@ -86,8 +86,12 @@ describe('analyzeContent', () => {
   // ─── Formatting Signals ─────────────────────────────────────
 
   it('detects line breaks for scannability', () => {
-    const withBreaks = analyzeContent('This is an important point\nHere is another key insight\nAnd a final takeaway');
-    const noBreaks = analyzeContent('This is an important point and here is another key insight and also a final takeaway');
+    const withBreaks = analyzeContent(
+      'This is an important point\nHere is another key insight\nAnd a final takeaway',
+    );
+    const noBreaks = analyzeContent(
+      'This is an important point and here is another key insight and also a final takeaway',
+    );
     expect(withBreaks.hasLineBreaks).toBe(true);
     expect(withBreaks.lineCount).toBe(3);
     expect(noBreaks.hasLineBreaks).toBe(false);
@@ -132,21 +136,21 @@ describe('analyzeContent', () => {
 
   it('generates suggestions for missing hook', () => {
     const result = analyzeContent('Just a regular tweet without a hook.');
-    const hookSuggestion = result.suggestions.find(s => s.signal === 'hook');
+    const hookSuggestion = result.suggestions.find((s) => s.signal === 'hook');
     expect(hookSuggestion).toBeDefined();
     expect(hookSuggestion?.impact).toBe('high');
   });
 
   it('generates suggestions for missing question', () => {
     const result = analyzeContent('This is a statement.');
-    const questionSuggestion = result.suggestions.find(s => s.signal === 'question');
+    const questionSuggestion = result.suggestions.find((s) => s.signal === 'question');
     expect(questionSuggestion).toBeDefined();
     expect(questionSuggestion?.message).toContain('150x');
   });
 
   it('warns about external links', () => {
     const result = analyzeContent('Check this out: https://example.com');
-    const linkWarning = result.suggestions.find(s => s.signal === 'external-link');
+    const linkWarning = result.suggestions.find((s) => s.signal === 'external-link');
     expect(linkWarning).toBeDefined();
     expect(linkWarning?.type).toBe('warning');
     expect(linkWarning?.impact).toBe('high');
@@ -154,7 +158,7 @@ describe('analyzeContent', () => {
 
   it('suggests adding CTA', () => {
     const result = analyzeContent('This is just a fact.');
-    const ctaSuggestion = result.suggestions.find(s => s.signal === 'cta');
+    const ctaSuggestion = result.suggestions.find((s) => s.signal === 'cta');
     expect(ctaSuggestion).toBeDefined();
     expect(ctaSuggestion?.impact).toBe('medium');
   });
@@ -164,11 +168,11 @@ describe('analyzeContent', () => {
   it('analyzes a well-optimized tweet', () => {
     const result = analyzeContent(
       'What if I told you most people get this wrong?\n\n' +
-      'Here are 3 proven strategies:\n' +
-      '1. Start with a hook\n' +
-      '2. Ask a question\n' +
-      '3. End with a CTA\n\n' +
-      'What do you think? 🚀'
+        'Here are 3 proven strategies:\n' +
+        '1. Start with a hook\n' +
+        '2. Ask a question\n' +
+        '3. End with a CTA\n\n' +
+        'What do you think? 🚀',
     );
     expect(result.hasHook).toBe(true);
     expect(result.hasQuestion).toBe(true);
@@ -183,7 +187,7 @@ describe('analyzeContent', () => {
   it('analyzes a poorly optimized tweet', () => {
     const result = analyzeContent(
       'hi check out my blog at mysite.com and also follow me at instagram.com/user ' +
-      'and facebook.com/page #please #follow #me #now #viral #content #growth #tips'
+        'and facebook.com/page #please #follow #me #now #viral #content #growth #tips',
     );
     expect(result.hasExternalLink).toBe(true);
     expect(result.hasHook).toBe(false);

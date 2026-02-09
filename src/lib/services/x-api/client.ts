@@ -28,14 +28,23 @@ import type { QuotaTrackerConfig } from './quota-tracker';
 // ─── Default Tweet Fields ───────────────────────────────────────────
 
 const DEFAULT_TWEET_FIELDS = [
-  'id', 'text', 'author_id', 'created_at',
-  'public_metrics', 'conversation_id',
-  'in_reply_to_user_id', 'attachments',
+  'id',
+  'text',
+  'author_id',
+  'created_at',
+  'public_metrics',
+  'conversation_id',
+  'in_reply_to_user_id',
+  'attachments',
 ] as const;
 
 const DEFAULT_USER_FIELDS = [
-  'id', 'name', 'username', 'created_at',
-  'public_metrics', 'verified_type',
+  'id',
+  'name',
+  'username',
+  'created_at',
+  'public_metrics',
+  'verified_type',
 ] as const;
 
 // ─── Client Configuration ───────────────────────────────────────────
@@ -92,16 +101,12 @@ export class XApiClient implements IXApiClient {
         );
       }
 
-      const response = await this.request<XApiTweet[]>(
-        'GET',
-        '/2/tweets',
-        {
-          ids: chunk.join(','),
-          'tweet.fields': (params.tweetFields ?? DEFAULT_TWEET_FIELDS).join(','),
-          'user.fields': (params.userFields ?? DEFAULT_USER_FIELDS).join(','),
-          expansions: (params.expansions ?? ['author_id']).join(','),
-        },
-      );
+      const response = await this.request<XApiTweet[]>('GET', '/2/tweets', {
+        ids: chunk.join(','),
+        'tweet.fields': (params.tweetFields ?? DEFAULT_TWEET_FIELDS).join(','),
+        'user.fields': (params.userFields ?? DEFAULT_USER_FIELDS).join(','),
+        expansions: (params.expansions ?? ['author_id']).join(','),
+      });
 
       this.quota.recordReads(1); // 1 read per batch request
       if (response.data) {
@@ -121,11 +126,7 @@ export class XApiClient implements IXApiClient {
     if (this.mockMode) return this.mockGetTimeline(params);
 
     if (!this.quota.canRead()) {
-      throw new XApiError(
-        'Monthly read quota exhausted.',
-        429,
-        'GET /2/users/:id/tweets',
-      );
+      throw new XApiError('Monthly read quota exhausted.', 429, 'GET /2/users/:id/tweets');
     }
 
     const queryParams: Record<string, string> = {
@@ -160,11 +161,7 @@ export class XApiClient implements IXApiClient {
     if (this.mockMode) return this.mockSearch(params);
 
     if (!this.quota.canRead()) {
-      throw new XApiError(
-        'Monthly read quota exhausted.',
-        429,
-        'GET /2/tweets/search/recent',
-      );
+      throw new XApiError('Monthly read quota exhausted.', 429, 'GET /2/tweets/search/recent');
     }
 
     const queryParams: Record<string, string> = {
@@ -177,11 +174,7 @@ export class XApiClient implements IXApiClient {
     if (params.nextToken) queryParams.next_token = params.nextToken;
     if (params.sortOrder) queryParams.sort_order = params.sortOrder;
 
-    const response = await this.request<XApiTweet[]>(
-      'GET',
-      '/2/tweets/search/recent',
-      queryParams,
-    );
+    const response = await this.request<XApiTweet[]>('GET', '/2/tweets/search/recent', queryParams);
 
     this.quota.recordReads(1);
     return response;
@@ -198,11 +191,7 @@ export class XApiClient implements IXApiClient {
     if (this.mockMode) return this.mockCreateTweet(params);
 
     if (!this.quota.canWrite()) {
-      throw new XApiError(
-        'Monthly write quota exhausted.',
-        429,
-        'POST /2/tweets',
-      );
+      throw new XApiError('Monthly write quota exhausted.', 429, 'POST /2/tweets');
     }
 
     const body: Record<string, unknown> = { text: params.text };
@@ -211,12 +200,7 @@ export class XApiClient implements IXApiClient {
     if (params.media) body.media = params.media;
     if (params.poll) body.poll = params.poll;
 
-    const response = await this.request<XApiTweet>(
-      'POST',
-      '/2/tweets',
-      undefined,
-      body,
-    );
+    const response = await this.request<XApiTweet>('POST', '/2/tweets', undefined, body);
 
     this.quota.recordWrites(1);
     return response;
@@ -270,7 +254,7 @@ export class XApiClient implements IXApiClient {
         }
 
         const headers: Record<string, string> = {
-          'Authorization': `Bearer ${this.userAccessToken ?? this.bearerToken}`,
+          Authorization: `Bearer ${this.userAccessToken ?? this.bearerToken}`,
           'Content-Type': 'application/json',
         };
 
@@ -309,7 +293,7 @@ export class XApiClient implements IXApiClient {
       (attempt, delay, error) => {
         console.warn(
           `[X API] Retry ${attempt + 1}/${this.retryConfig.maxRetries} for ${endpoint} ` +
-          `after ${delay}ms (${error.statusCode}: ${error.message})`,
+            `after ${delay}ms (${error.statusCode}: ${error.message})`,
         );
       },
     );
@@ -320,7 +304,7 @@ export class XApiClient implements IXApiClient {
   private mockGetTweets(params: TweetLookupParams): XApiResponse<XApiTweet[]> {
     this.quota.recordReads(1);
     return {
-      data: params.ids.map(id => this.createMockTweet(id)),
+      data: params.ids.map((id) => this.createMockTweet(id)),
     };
   }
 

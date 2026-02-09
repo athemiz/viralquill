@@ -20,25 +20,25 @@ export interface ContentSignals {
   wordCount: number;
   lineCount: number;
   isThread: boolean;
-  threadLength: number;          // 1 for single tweet
+  threadLength: number; // 1 for single tweet
 
   // Engagement boosters
-  hasHook: boolean;              // strong opening line
+  hasHook: boolean; // strong opening line
   hookType: HookType | null;
-  hasQuestion: boolean;          // drives replies (+13.5 to +75 weight)
-  hasCTA: boolean;               // call to action (reply, RT, like)
-  hasPoll: boolean;              // polls generate high reply counts
+  hasQuestion: boolean; // drives replies (+13.5 to +75 weight)
+  hasCTA: boolean; // call to action (reply, RT, like)
+  hasPoll: boolean; // polls generate high reply counts
 
   // Penalties
-  hasExternalLink: boolean;      // penalized 30-50%
-  hasHashtags: boolean;          // discovery signal, not ranking
+  hasExternalLink: boolean; // penalized 30-50%
+  hasHashtags: boolean; // discovery signal, not ranking
   hashtagCount: number;
 
   // Formatting
   hasEmoji: boolean;
   emojiCount: number;
-  hasLineBreaks: boolean;        // scannable formatting
-  hasListFormat: boolean;        // numbered/bulleted lists
+  hasLineBreaks: boolean; // scannable formatting
+  hasListFormat: boolean; // numbered/bulleted lists
 
   // Media
   hasMention: boolean;
@@ -53,22 +53,21 @@ export interface ContentSignals {
 }
 
 export type HookType =
-  | 'problem-solution'    // "Most [people] waste [X]. Here's the fix:"
-  | 'contrarian'          // "Everyone says X. They're wrong."
-  | 'number-driven'       // "I analyzed 10,000 tweets. Here are 7 patterns."
-  | 'story'               // "In 2023, I lost everything. Then I discovered..."
-  | 'question'            // "What if everything you knew about X was wrong?"
-  | 'bold-claim'          // "This one trick..."
+  | 'problem-solution' // "Most [people] waste [X]. Here's the fix:"
+  | 'contrarian' // "Everyone says X. They're wrong."
+  | 'number-driven' // "I analyzed 10,000 tweets. Here are 7 patterns."
+  | 'story' // "In 2023, I lost everything. Then I discovered..."
+  | 'question' // "What if everything you knew about X was wrong?"
+  | 'bold-claim' // "This one trick..."
   | null;
 
 export type LengthCategory =
-  | 'too-short'     // < 30 chars
-  | 'short'         // 30-70 chars
-  | 'optimal'       // 71-100 chars (sweet spot)
-  | 'medium'        // 101-200 chars
-  | 'long'          // 201-280 chars
-  | 'thread-needed' // > 280 chars
-  ;
+  | 'too-short' // < 30 chars
+  | 'short' // 30-70 chars
+  | 'optimal' // 71-100 chars (sweet spot)
+  | 'medium' // 101-200 chars
+  | 'long' // 201-280 chars
+  | 'thread-needed'; // > 280 chars
 
 export interface Suggestion {
   type: 'boost' | 'warning' | 'info';
@@ -87,7 +86,8 @@ export function detectQuestion(text: string): boolean {
   if (text.includes('?')) return true;
 
   // Question words at start of sentences
-  const questionPatterns = /\b(what|why|how|when|where|who|which|would|could|should|do you|have you|are you|is there|can you|did you)\b/i;
+  const questionPatterns =
+    /\b(what|why|how|when|where|who|which|would|could|should|do you|have you|are you|is there|can you|did you)\b/i;
   return questionPatterns.test(text);
 }
 
@@ -98,25 +98,37 @@ export function detectHookType(text: string): HookType {
   const firstLine = text.split('\n')[0].trim().toLowerCase();
 
   // Story: "In 20XX...", "X years ago..." (check BEFORE number-driven)
-  if (/^(in \d{4}|\d+ (years?|months?|days?|weeks?) ago|when i (was|first|started)|i used to|i remember|true story)\b/.test(firstLine)) {
+  if (
+    /^(in \d{4}|\d+ (years?|months?|days?|weeks?) ago|when i (was|first|started)|i used to|i remember|true story)\b/.test(
+      firstLine,
+    )
+  ) {
     return 'story';
   }
 
   // Contrarian: "Everyone says...", "Popular opinion:..." (check BEFORE problem-solution to catch "here's why" in context)
-  if (/^(everyone|nobody|no one|popular opinion|unpopular|controversial|hot take|contrary)\b/.test(firstLine) ||
-      /they'?re wrong/.test(firstLine)) {
+  if (
+    /^(everyone|nobody|no one|popular opinion|unpopular|controversial|hot take|contrary)\b/.test(
+      firstLine,
+    ) ||
+    /they'?re wrong/.test(firstLine)
+  ) {
     return 'contrarian';
   }
 
   // Number-driven: "I analyzed..." or "X things/ways/tips..."
-  if (/^i (analyzed|studied|reviewed|looked at|read|spent)\b/.test(firstLine) ||
-      /\b\d+\s+(things|ways|tips|lessons|mistakes|patterns|rules|steps|reasons)\b/.test(firstLine)) {
+  if (
+    /^i (analyzed|studied|reviewed|looked at|read|spent)\b/.test(firstLine) ||
+    /\b\d+\s+(things|ways|tips|lessons|mistakes|patterns|rules|steps|reasons)\b/.test(firstLine)
+  ) {
     return 'number-driven';
   }
 
   // Problem-solution: "Most people...", "The problem with...", "Stop doing X"
-  if (/^(most|the problem|the issue|the mistake|stop|quit|don't|never)\b/.test(firstLine) ||
-      /here'?s (the|how|why|what)/.test(firstLine)) {
+  if (
+    /^(most|the problem|the issue|the mistake|stop|quit|don't|never)\b/.test(firstLine) ||
+    /here'?s (the|how|why|what)/.test(firstLine)
+  ) {
     return 'problem-solution';
   }
 
@@ -126,7 +138,11 @@ export function detectHookType(text: string): HookType {
   }
 
   // Bold claim: "This is the...", "The secret...", "One simple..."
-  if (/^(this is the|the (secret|key|truth|real reason)|one (simple|thing)|the only|the biggest)\b/.test(firstLine)) {
+  if (
+    /^(this is the|the (secret|key|truth|real reason)|one (simple|thing)|the only|the biggest)\b/.test(
+      firstLine,
+    )
+  ) {
     return 'bold-claim';
   }
 
@@ -137,7 +153,8 @@ export function detectHookType(text: string): HookType {
  * Detect if text contains a call to action.
  */
 export function detectCTA(text: string): boolean {
-  const ctaPatterns = /\b(retweet|rt if|like if|reply with|drop a|comment|share this|follow me|bookmark this|save this|tag someone|let me know|agree\??|thoughts\??|what do you think)\b/i;
+  const ctaPatterns =
+    /\b(retweet|rt if|like if|reply with|drop a|comment|share this|follow me|bookmark this|save this|tag someone|let me know|agree\??|thoughts\??|what do you think)\b/i;
   return ctaPatterns.test(text);
 }
 
@@ -168,7 +185,8 @@ export function detectHashtags(text: string): { has: boolean; count: number } {
  */
 export function detectEmoji(text: string): { has: boolean; count: number } {
   // Unicode emoji ranges
-  const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}\u{200D}\u{20E3}\u{E0020}-\u{E007F}]/gu;
+  const emojiRegex =
+    /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}\u{200D}\u{20E3}\u{E0020}-\u{E007F}]/gu;
   const matches = text.match(emojiRegex);
   return {
     has: matches !== null && matches.length > 0,

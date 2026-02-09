@@ -10,9 +10,9 @@ import type { QuotaTrackerConfig } from '../quota-tracker';
 const testConfig: QuotaTrackerConfig = {
   monthlyReadCap: 15_000,
   monthlyWriteCap: 50_000,
-  reservePercent: 0.10,
-  warningThreshold: 0.70,
-  criticalThreshold: 0.90,
+  reservePercent: 0.1,
+  warningThreshold: 0.7,
+  criticalThreshold: 0.9,
 };
 
 describe('QuotaTracker', () => {

@@ -147,9 +147,10 @@ export function buildRewriterMessage(request: RewriterRequest): string {
     constraints.push('MUST preserve the original intent (≥85% semantic similarity)');
   }
 
-  const constraintText = constraints.length > 0
-    ? `\n\nConstraints:\n${constraints.map(c => `- ${c}`).join('\n')}`
-    : '';
+  const constraintText =
+    constraints.length > 0
+      ? `\n\nConstraints:\n${constraints.map((c) => `- ${c}`).join('\n')}`
+      : '';
 
   return `Original content to optimize:\n\n"${request.originalText}"${constraintText}\n\nProvide your rewritten version with reasoning and list of changes.`;
 }

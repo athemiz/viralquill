@@ -30,7 +30,12 @@ interface ExampleTweet {
 }
 
 const TONE_OPTIONS = [
-  'professional', 'casual', 'authoritative', 'humorous', 'provocative', 'educational',
+  'professional',
+  'casual',
+  'authoritative',
+  'humorous',
+  'provocative',
+  'educational',
 ] as const;
 
 function ScoreBadge({ score }: { score: AlgoScore }) {
@@ -41,7 +46,9 @@ function ScoreBadge({ score }: { score: AlgoScore }) {
     low: 'bg-red-500 text-white',
   };
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold ${colors[score.bucket]}`}>
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold ${colors[score.bucket]}`}
+    >
       {score.normalized}/100 · {score.bucket.toUpperCase()}
     </span>
   );
@@ -59,7 +66,9 @@ function SuggestionCard({ suggestion }: { suggestion: Suggestion }) {
     low: 'border-gray-300',
   };
   return (
-    <div className={`rounded-lg border-l-4 p-3 bg-white dark:bg-zinc-900 ${borders[suggestion.impact]}`}>
+    <div
+      className={`rounded-lg border-l-4 p-3 bg-white dark:bg-zinc-900 ${borders[suggestion.impact]}`}
+    >
       <div className="flex items-start gap-2">
         <span>{icons[suggestion.type]}</span>
         <div>
@@ -219,11 +228,15 @@ export default function Home() {
             <div className="lg:col-span-2 space-y-4">
               <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Draft Editor</h2>
+                  <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                    Draft Editor
+                  </h2>
                   <span className="text-sm text-zinc-400">
                     {text.length}/280 chars
                     {text.length > 280 && (
-                      <span className="text-blue-500 ml-1">· Thread ({Math.ceil(text.length / 260)} tweets)</span>
+                      <span className="text-blue-500 ml-1">
+                        · Thread ({Math.ceil(text.length / 260)} tweets)
+                      </span>
                     )}
                   </span>
                 </div>
@@ -261,13 +274,20 @@ export default function Home() {
               {rewrite && (
                 <div className="bg-white dark:bg-zinc-900 rounded-xl border border-blue-200 dark:border-blue-800 p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400">✨ AI Rewrite Suggestion</h3>
+                    <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                      ✨ AI Rewrite Suggestion
+                    </h3>
                     <ScoreBadge score={rewrite.predictedScore} />
                   </div>
-                  <p className="text-zinc-800 dark:text-zinc-200 mb-3 whitespace-pre-wrap">{rewrite.rewrittenText}</p>
+                  <p className="text-zinc-800 dark:text-zinc-200 mb-3 whitespace-pre-wrap">
+                    {rewrite.rewrittenText}
+                  </p>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {rewrite.changes.map((change, i) => (
-                      <span key={i} className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded">
+                      <span
+                        key={i}
+                        className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded"
+                      >
                         {change}
                       </span>
                     ))}
@@ -284,7 +304,9 @@ export default function Home() {
               {/* Suggestions */}
               {analysis && analysis.signals.suggestions.length > 0 && (
                 <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-                  <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-3">💡 Optimization Suggestions</h3>
+                  <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-3">
+                    💡 Optimization Suggestions
+                  </h3>
                   <div className="space-y-2">
                     {analysis.signals.suggestions.map((s, i) => (
                       <SuggestionCard key={i} suggestion={s} />
@@ -298,7 +320,9 @@ export default function Home() {
             <div className="space-y-4">
               {/* Live Score */}
               <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-                <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-4">Algorithm Score</h2>
+                <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-4">
+                  Algorithm Score
+                </h2>
                 {analysis ? (
                   <div className="space-y-4">
                     <div className="text-center">
@@ -321,14 +345,28 @@ export default function Home() {
               {/* Content Signals */}
               {analysis && (
                 <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-                  <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-3">Content Signals</h3>
+                  <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-3">
+                    Content Signals
+                  </h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <Signal label="Hook" active={analysis.signals.hasHook} detail={analysis.signals.hookType} />
+                    <Signal
+                      label="Hook"
+                      active={analysis.signals.hasHook}
+                      detail={analysis.signals.hookType}
+                    />
                     <Signal label="Question" active={analysis.signals.hasQuestion} />
                     <Signal label="CTA" active={analysis.signals.hasCTA} />
                     <Signal label="Ext. Link" active={analysis.signals.hasExternalLink} bad />
-                    <Signal label="Emoji" active={analysis.signals.hasEmoji} detail={`${analysis.signals.emojiCount}`} />
-                    <Signal label="Hashtags" active={analysis.signals.hasHashtags} detail={`${analysis.signals.hashtagCount}`} />
+                    <Signal
+                      label="Emoji"
+                      active={analysis.signals.hasEmoji}
+                      detail={`${analysis.signals.emojiCount}`}
+                    />
+                    <Signal
+                      label="Hashtags"
+                      active={analysis.signals.hasHashtags}
+                      detail={`${analysis.signals.hashtagCount}`}
+                    />
                     <Signal label="Line Breaks" active={analysis.signals.hasLineBreaks} />
                     <Signal label="List Format" active={analysis.signals.hasListFormat} />
                   </div>
@@ -353,17 +391,26 @@ export default function Home() {
         ) : (
           /* Examples Tab */
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">📊 Example Tweets — Scored by Algorithm</h2>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Mock tweets showing how the scoring engine works. Click any to load into editor.</p>
+            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+              📊 Example Tweets — Scored by Algorithm
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              Mock tweets showing how the scoring engine works. Click any to load into editor.
+            </p>
             <div className="grid gap-4">
               {examples.map((tweet) => (
                 <div
                   key={tweet.id}
-                  onClick={() => { setText(tweet.text); setActiveTab('editor'); }}
+                  onClick={() => {
+                    setText(tweet.text);
+                    setActiveTab('editor');
+                  }}
                   className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 cursor-pointer hover:border-blue-400 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <p className="text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap flex-1">{tweet.text}</p>
+                    <p className="text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap flex-1">
+                      {tweet.text}
+                    </p>
                     <ScoreBadge score={tweet.algoScore} />
                   </div>
                   <div className="flex gap-4 mt-3 text-xs text-zinc-400">
@@ -382,22 +429,35 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-zinc-200 dark:border-zinc-800 py-4 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-center text-xs text-zinc-400">
-          ViralQuill v0.1.0 · 100% Local Dev Mode · No external API calls · Scoring based on X Heavy Ranker weights
+          ViralQuill v0.1.0 · 100% Local Dev Mode · No external API calls · Scoring based on X Heavy
+          Ranker weights
         </div>
       </footer>
     </div>
   );
 }
 
-function Signal({ label, active, detail, bad }: { label: string; active: boolean; detail?: string | null; bad?: boolean }) {
+function Signal({
+  label,
+  active,
+  detail,
+  bad,
+}: {
+  label: string;
+  active: boolean;
+  detail?: string | null;
+  bad?: boolean;
+}) {
   return (
-    <div className={`flex items-center gap-1.5 px-2 py-1 rounded ${
-      active
-        ? bad
-          ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
-          : 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400'
-        : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-400'
-    }`}>
+    <div
+      className={`flex items-center gap-1.5 px-2 py-1 rounded ${
+        active
+          ? bad
+            ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
+            : 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400'
+          : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-400'
+      }`}
+    >
       <span>{active ? (bad ? '✗' : '✓') : '○'}</span>
       <span>{label}</span>
       {detail && active && <span className="text-xs opacity-70">({detail})</span>}

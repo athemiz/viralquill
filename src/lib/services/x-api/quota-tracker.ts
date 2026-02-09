@@ -10,19 +10,19 @@
 import type { QuotaState, QuotaLevel } from './types';
 
 export interface QuotaTrackerConfig {
-  monthlyReadCap: number;         // 15,000 for Basic
-  monthlyWriteCap: number;        // 50,000 for Basic
-  reservePercent: number;         // 10% reserved for system/background jobs
-  warningThreshold: number;       // 0.7 = warning at 70%
-  criticalThreshold: number;      // 0.9 = critical at 90%
+  monthlyReadCap: number; // 15,000 for Basic
+  monthlyWriteCap: number; // 50,000 for Basic
+  reservePercent: number; // 10% reserved for system/background jobs
+  warningThreshold: number; // 0.7 = warning at 70%
+  criticalThreshold: number; // 0.9 = critical at 90%
 }
 
 export const DEFAULT_QUOTA_CONFIG: QuotaTrackerConfig = {
   monthlyReadCap: 15_000,
   monthlyWriteCap: 50_000,
-  reservePercent: 0.10,
-  warningThreshold: 0.70,
-  criticalThreshold: 0.90,
+  reservePercent: 0.1,
+  warningThreshold: 0.7,
+  criticalThreshold: 0.9,
 };
 
 export class QuotaTracker {
@@ -101,21 +101,21 @@ export class QuotaTracker {
    */
   canRead(count: number = 1): boolean {
     const effectiveCap = this.config.monthlyReadCap * (1 - this.config.reservePercent);
-    return (this.readsUsed + count) <= effectiveCap;
+    return this.readsUsed + count <= effectiveCap;
   }
 
   /**
    * Check if a write operation is allowed.
    */
   canWrite(count: number = 1): boolean {
-    return (this.writesUsed + count) <= this.config.monthlyWriteCap;
+    return this.writesUsed + count <= this.config.monthlyWriteCap;
   }
 
   /**
    * Check if a system/background read is allowed (uses reserve budget).
    */
   canSystemRead(count: number = 1): boolean {
-    return (this.readsUsed + count) <= this.config.monthlyReadCap;
+    return this.readsUsed + count <= this.config.monthlyReadCap;
   }
 
   // ─── Fair Share ─────────────────────────────────────────────────
@@ -169,10 +169,14 @@ export class QuotaTracker {
    */
   getPollingMultiplier(): number {
     switch (this.getLevel()) {
-      case 'normal':    return 1;
-      case 'warning':   return 2;    // reduce frequency by 50%
-      case 'critical':  return 4;    // reduce frequency by 75%
-      case 'exhausted': return Infinity; // stop polling
+      case 'normal':
+        return 1;
+      case 'warning':
+        return 2; // reduce frequency by 50%
+      case 'critical':
+        return 4; // reduce frequency by 75%
+      case 'exhausted':
+        return Infinity; // stop polling
     }
   }
 

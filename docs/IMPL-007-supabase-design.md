@@ -11,6 +11,7 @@
 This document defines the Supabase database schema, authentication flow, and Row Level Security (RLS) policies for ViralQuill MVP.
 
 **Dependencies:**
+
 - Supabase project (pending — requested via #human-action)
 - X API OAuth 2.0 credentials (pending)
 - OpenAI API key (pending — for embeddings)
@@ -28,12 +29,14 @@ User → "Login with X" → Supabase Auth → X OAuth 2.0 (PKCE) → Callback �
 ```
 
 **Scopes requested:**
+
 - `tweet.read` — Read user's tweets and timeline
 - `tweet.write` — Post tweets on behalf of user
 - `users.read` — Read user profile
 - `offline.access` — Refresh tokens for background scheduling
 
 **Token storage:**
+
 - Access token + refresh token stored in `user_tokens` table (encrypted)
 - Supabase Auth manages session/JWT
 - Tokens refreshed automatically via `offline.access` scope
@@ -282,10 +285,12 @@ CREATE POLICY "Users read own quota" ON user_quota FOR SELECT USING (auth.uid() 
 **App-level monthly cap (Basic: 15K reads / 50K writes) shared across ALL users.**
 
 This is the critical constraint:
+
 - 10 users = 1,500 reads/user/month
 - 100 users = 150 reads/user/month → unsustainable on Basic
 
 **Mitigation patterns:**
+
 1. **Redis/edge caching** (Upstash) — cache popular tweets, timelines, search results
 2. **Stale-while-revalidate** — serve cached data while refreshing in background
 3. **Batch reads** — `/2/tweets` batch endpoint (100 IDs per request)
@@ -334,13 +339,13 @@ Enable pgvector extension, create `content_embeddings` table + HNSW index.
 
 ## 6. Supabase Functions (Edge Functions)
 
-| Function | Trigger | Purpose |
-|----------|---------|----------|
-| `refresh-x-token` | Scheduled (hourly) | Refresh expiring X API tokens |
-| `post-scheduled` | Cron (every minute) | Post scheduled tweets |
-| `collect-analytics` | Cron (every 6 hours) | Fetch metrics for posted tweets |
-| `recompute-percentiles` | Cron (weekly) | Recalculate engagement percentiles |
-| `check-originality` | On draft save | Compare embedding vs corpus (< 0.7 similarity) |
+| Function                | Trigger              | Purpose                                        |
+| ----------------------- | -------------------- | ---------------------------------------------- |
+| `refresh-x-token`       | Scheduled (hourly)   | Refresh expiring X API tokens                  |
+| `post-scheduled`        | Cron (every minute)  | Post scheduled tweets                          |
+| `collect-analytics`     | Cron (every 6 hours) | Fetch metrics for posted tweets                |
+| `recompute-percentiles` | Cron (weekly)        | Recalculate engagement percentiles             |
+| `check-originality`     | On draft save        | Compare embedding vs corpus (< 0.7 similarity) |
 
 ---
 

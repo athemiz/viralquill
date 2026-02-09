@@ -49,15 +49,17 @@ describe('detectQuestion', () => {
 
 describe('detectHookType', () => {
   it('detects problem-solution hooks', () => {
-    expect(detectHookType('Most people waste time on X. Here\'s the fix:')).toBe('problem-solution');
+    expect(detectHookType("Most people waste time on X. Here's the fix:")).toBe('problem-solution');
     expect(detectHookType('The problem with current approaches is...')).toBe('problem-solution');
-    expect(detectHookType('Stop doing X. Here\'s what to do instead.')).toBe('problem-solution');
+    expect(detectHookType("Stop doing X. Here's what to do instead.")).toBe('problem-solution');
   });
 
   it('detects contrarian hooks', () => {
-    expect(detectHookType('Everyone says X. They\'re wrong.')).toBe('contrarian');
-    expect(detectHookType('Popular opinion: Y is best. Here\'s why that\'s false.')).toBe('contrarian');
-    expect(detectHookType('Unpopular take: Z doesn\'t matter.')).toBe('contrarian');
+    expect(detectHookType("Everyone says X. They're wrong.")).toBe('contrarian');
+    expect(detectHookType("Popular opinion: Y is best. Here's why that's false.")).toBe(
+      'contrarian',
+    );
+    expect(detectHookType("Unpopular take: Z doesn't matter.")).toBe('contrarian');
     expect(detectHookType('Hot take: this changes everything')).toBe('contrarian');
   });
 

@@ -8,7 +8,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createLLMProvider } from '@/lib/services/llm';
 import type { RewriteRequest } from '@/lib/types';
 
-const llm = createLLMProvider('mock');
+// Environment-driven provider selection: read VIRALQUILL_LLM_PROVIDER from env, defaults to 'mock'
+const providerName =
+  (process.env.VIRALQUILL_LLM_PROVIDER as 'groq' | 'openai' | 'anthropic' | 'mock') || 'mock';
+const llm = createLLMProvider(providerName);
 
 export async function POST(request: NextRequest) {
   try {

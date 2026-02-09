@@ -27,9 +27,9 @@ import {
  * @returns Complete signal analysis with score and suggestions
  */
 export function analyzeContent(text: string): ContentSignals {
-  const lines = text.split('\n').filter(l => l.trim().length > 0);
+  const lines = text.split('\n').filter((l) => l.trim().length > 0);
   const charCount = text.length;
-  const wordCount = text.split(/\s+/).filter(w => w.length > 0).length;
+  const wordCount = text.split(/\s+/).filter((w) => w.length > 0).length;
   const isThread = charCount > 280;
   const threadLength = isThread ? Math.ceil(charCount / 260) : 1; // ~260 usable chars per tweet
 
@@ -113,7 +113,8 @@ function calculatePreScore(
 
   // Thread structure
   if (signals.isThread) {
-    if (signals.threadLength >= 3 && signals.threadLength <= 6) score += 5; // optimal thread length
+    if (signals.threadLength >= 3 && signals.threadLength <= 6)
+      score += 5; // optimal thread length
     else if (signals.threadLength > 10) score -= 5; // too long
   }
 
@@ -142,7 +143,8 @@ function generateSuggestions(
     suggestions.push({
       type: 'boost',
       signal: 'hook',
-      message: 'Add a strong hook in the first line. Try: a contrarian take, a number-driven claim, or a question.',
+      message:
+        'Add a strong hook in the first line. Try: a contrarian take, a number-driven claim, or a question.',
       impact: 'high',
     });
   }
@@ -151,7 +153,8 @@ function generateSuggestions(
     suggestions.push({
       type: 'boost',
       signal: 'question',
-      message: 'Add a question to drive replies. Replies are 150x more valuable than likes in the algorithm.',
+      message:
+        'Add a question to drive replies. Replies are 150x more valuable than likes in the algorithm.',
       impact: 'high',
     });
   }
@@ -160,7 +163,8 @@ function generateSuggestions(
     suggestions.push({
       type: 'warning',
       signal: 'external-link',
-      message: 'External links are penalized 30-50% by the algorithm. Consider moving the link to a reply instead.',
+      message:
+        'External links are penalized 30-50% by the algorithm. Consider moving the link to a reply instead.',
       impact: 'high',
     });
   }
@@ -171,7 +175,8 @@ function generateSuggestions(
     suggestions.push({
       type: 'boost',
       signal: 'cta',
-      message: 'Add a call to action (e.g., "What do you think?", "RT if you agree", "Bookmark this").',
+      message:
+        'Add a call to action (e.g., "What do you think?", "RT if you agree", "Bookmark this").',
       impact: 'medium',
     });
   }

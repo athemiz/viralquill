@@ -23,10 +23,10 @@ describe('calculateDelay', () => {
   };
 
   it('calculates exponential delays without jitter', () => {
-    expect(calculateDelay(0, noJitterConfig)).toBe(1000);  // 1000 * 2^0
-    expect(calculateDelay(1, noJitterConfig)).toBe(2000);  // 1000 * 2^1
-    expect(calculateDelay(2, noJitterConfig)).toBe(4000);  // 1000 * 2^2
-    expect(calculateDelay(3, noJitterConfig)).toBe(8000);  // 1000 * 2^3
+    expect(calculateDelay(0, noJitterConfig)).toBe(1000); // 1000 * 2^0
+    expect(calculateDelay(1, noJitterConfig)).toBe(2000); // 1000 * 2^1
+    expect(calculateDelay(2, noJitterConfig)).toBe(4000); // 1000 * 2^2
+    expect(calculateDelay(3, noJitterConfig)).toBe(8000); // 1000 * 2^3
   });
 
   it('caps delay at maxDelayMs', () => {
@@ -43,7 +43,7 @@ describe('calculateDelay', () => {
 
     // Base delay at attempt 1 = 2000ms
     // Jitter range: 2000 ± 500 = [1500, 2500]
-    expect(delays.every(d => d >= 1500 && d <= 2500)).toBe(true);
+    expect(delays.every((d) => d >= 1500 && d <= 2500)).toBe(true);
     // Should have some variation (not all identical)
     const unique = new Set(delays);
     expect(unique.size).toBeGreaterThan(1);
@@ -127,7 +127,8 @@ describe('withRetry', () => {
   });
 
   it('retries on retryable error and succeeds', async () => {
-    const fn = vi.fn()
+    const fn = vi
+      .fn()
       .mockRejectedValueOnce(new XApiError('rate limited', 429, 'GET /2/tweets'))
       .mockResolvedValue('success after retry');
 
@@ -137,25 +138,22 @@ describe('withRetry', () => {
   });
 
   it('throws after exhausting retries', async () => {
-    const fn = vi.fn().mockRejectedValue(
-      new XApiError('server error', 500, 'GET /2/tweets'),
-    );
+    const fn = vi.fn().mockRejectedValue(new XApiError('server error', 500, 'GET /2/tweets'));
 
     await expect(withRetry(fn, fastConfig)).rejects.toThrow('server error');
     expect(fn).toHaveBeenCalledTimes(3); // initial + 2 retries
   });
 
   it('does not retry non-retryable errors', async () => {
-    const fn = vi.fn().mockRejectedValue(
-      new XApiError('not found', 404, 'GET /2/tweets'),
-    );
+    const fn = vi.fn().mockRejectedValue(new XApiError('not found', 404, 'GET /2/tweets'));
 
     await expect(withRetry(fn, fastConfig)).rejects.toThrow('not found');
     expect(fn).toHaveBeenCalledTimes(1); // no retries
   });
 
   it('calls onRetry callback before each retry', async () => {
-    const fn = vi.fn()
+    const fn = vi
+      .fn()
       .mockRejectedValueOnce(new XApiError('error', 500, 'GET /2/tweets'))
       .mockResolvedValue('ok');
     const onRetry = vi.fn();

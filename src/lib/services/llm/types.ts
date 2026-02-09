@@ -9,7 +9,7 @@ import type { RewriteRequest, RewriteResult, JudgeResult, ToneType } from '@/lib
  * LLM Provider configuration.
  */
 export interface LLMProviderConfig {
-  provider: 'openai' | 'anthropic' | 'mock';
+  provider: 'openai' | 'anthropic' | 'mock' | 'groq';
   rewriterModel: string;
   judgeModel: string;
   embedderModel: string;

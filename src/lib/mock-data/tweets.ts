@@ -25,7 +25,7 @@ export const MOCK_TWEETS: Tweet[] = [
   },
   {
     id: 'mock-002',
-    text: 'Everyone says you need to post 5x a day on X.\n\nThey\'re wrong.\n\nI grew from 0 to 50K followers posting once a day.\n\nQuality > Quantity. Always.',
+    text: "Everyone says you need to post 5x a day on X.\n\nThey're wrong.\n\nI grew from 0 to 50K followers posting once a day.\n\nQuality > Quantity. Always.",
     authorId: 'user-001',
     createdAt: '2026-02-06T09:15:00Z',
     metrics: {
@@ -57,7 +57,7 @@ export const MOCK_TWEETS: Tweet[] = [
   },
   {
     id: 'mock-004',
-    text: 'What\'s the one tool you can\'t live without as a developer?\n\nMine is VS Code. Reply with yours 👇',
+    text: "What's the one tool you can't live without as a developer?\n\nMine is VS Code. Reply with yours 👇",
     authorId: 'user-001',
     createdAt: '2026-02-04T11:00:00Z',
     metrics: {
@@ -98,7 +98,9 @@ export function getMockTweet(id: string): Tweet | undefined {
 export function getMockTweetsSorted(): Tweet[] {
   return [...MOCK_TWEETS].sort(
     (a, b) =>
-      (b.metrics.replies * 13.5 + b.metrics.retweets + b.metrics.likes * 0.5) -
+      b.metrics.replies * 13.5 +
+      b.metrics.retweets +
+      b.metrics.likes * 0.5 -
       (a.metrics.replies * 13.5 + a.metrics.retweets + a.metrics.likes * 0.5),
   );
 }

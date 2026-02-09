@@ -5,12 +5,7 @@
 
 export { analyzeContent } from './analyzer';
 
-export type {
-  ContentSignals,
-  HookType,
-  LengthCategory,
-  Suggestion,
-} from './signals';
+export type { ContentSignals, HookType, LengthCategory, Suggestion } from './signals';
 
 export {
   detectQuestion,

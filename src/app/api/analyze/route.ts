@@ -26,7 +26,9 @@ export async function POST(request: NextRequest) {
     const estimatedMetrics: TweetMetrics = {
       likes: Math.round(signals.preOptimizationScore * 2),
       retweets: Math.round(signals.preOptimizationScore * 0.5),
-      replies: signals.hasQuestion ? Math.round(signals.preOptimizationScore * 1.5) : Math.round(signals.preOptimizationScore * 0.3),
+      replies: signals.hasQuestion
+        ? Math.round(signals.preOptimizationScore * 1.5)
+        : Math.round(signals.preOptimizationScore * 0.3),
       impressions: Math.round(signals.preOptimizationScore * 100),
       bookmarks: Math.round(signals.preOptimizationScore * 0.2),
       profileClicks: Math.round(signals.preOptimizationScore * 0.1),

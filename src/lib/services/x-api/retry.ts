@@ -27,7 +27,10 @@ export const DEFAULT_RETRY_CONFIG: RetryConfig = {
  * @param config - Retry configuration
  * @returns Delay in milliseconds
  */
-export function calculateDelay(attempt: number, config: RetryConfig = DEFAULT_RETRY_CONFIG): number {
+export function calculateDelay(
+  attempt: number,
+  config: RetryConfig = DEFAULT_RETRY_CONFIG,
+): number {
   // Exponential: base * multiplier^attempt
   const exponentialDelay = config.baseDelayMs * Math.pow(config.backoffMultiplier, attempt);
 
@@ -106,7 +109,7 @@ export function delayUntilReset(resetAt: Date): number {
  * @param ms - Duration in milliseconds
  */
 export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**

@@ -69,7 +69,7 @@ export interface XApiMedia {
 // ─── API Request Types ──────────────────────────────────────────────
 
 export interface TweetLookupParams {
-  ids: string[];                    // max 100 per request (batch)
+  ids: string[]; // max 100 per request (batch)
   tweetFields?: TweetField[];
   userFields?: UserField[];
   expansions?: Expansion[];
@@ -77,19 +77,19 @@ export interface TweetLookupParams {
 
 export interface UserTimelineParams {
   userId: string;
-  maxResults?: number;              // 5-100, default 10
+  maxResults?: number; // 5-100, default 10
   sinceId?: string;
   untilId?: string;
   paginationToken?: string;
   tweetFields?: TweetField[];
-  startTime?: string;               // ISO 8601
-  endTime?: string;                 // ISO 8601
+  startTime?: string; // ISO 8601
+  endTime?: string; // ISO 8601
   exclude?: ('retweets' | 'replies')[];
 }
 
 export interface SearchRecentParams {
   query: string;
-  maxResults?: number;              // 10-100, default 10
+  maxResults?: number; // 10-100, default 10
   sinceId?: string;
   untilId?: string;
   nextToken?: string;
@@ -99,7 +99,7 @@ export interface SearchRecentParams {
 
 export interface CreateTweetParams {
   text: string;
-  replyTo?: string;                 // in_reply_to_tweet_id
+  replyTo?: string; // in_reply_to_tweet_id
   quoteTweetId?: string;
   media?: { media_ids: string[] };
   poll?: { options: string[]; duration_minutes: number };
@@ -108,20 +108,35 @@ export interface CreateTweetParams {
 // ─── Field Selections ───────────────────────────────────────────────
 
 export type TweetField =
-  | 'id' | 'text' | 'author_id' | 'created_at'
-  | 'public_metrics' | 'non_public_metrics'
-  | 'conversation_id' | 'in_reply_to_user_id'
-  | 'attachments' | 'context_annotations'
-  | 'entities' | 'lang' | 'source';
+  | 'id'
+  | 'text'
+  | 'author_id'
+  | 'created_at'
+  | 'public_metrics'
+  | 'non_public_metrics'
+  | 'conversation_id'
+  | 'in_reply_to_user_id'
+  | 'attachments'
+  | 'context_annotations'
+  | 'entities'
+  | 'lang'
+  | 'source';
 
 export type UserField =
-  | 'id' | 'name' | 'username' | 'created_at'
-  | 'public_metrics' | 'verified_type'
-  | 'description' | 'profile_image_url';
+  | 'id'
+  | 'name'
+  | 'username'
+  | 'created_at'
+  | 'public_metrics'
+  | 'verified_type'
+  | 'description'
+  | 'profile_image_url';
 
 export type Expansion =
-  | 'author_id' | 'attachments.media_keys'
-  | 'referenced_tweets.id' | 'in_reply_to_user_id';
+  | 'author_id'
+  | 'attachments.media_keys'
+  | 'referenced_tweets.id'
+  | 'in_reply_to_user_id';
 
 // ─── Rate Limit Config ──────────────────────────────────────────────
 
@@ -132,27 +147,27 @@ export interface EndpointRateLimit {
 }
 
 export const ENDPOINT_RATE_LIMITS: Record<string, EndpointRateLimit> = {
-  'GET /2/tweets':               { perApp15m: 3500,  perUser15m: 5000 },
-  'GET /2/tweets/:id':           { perApp15m: 450,   perUser15m: 900 },
-  'GET /2/tweets/search/recent': { perApp15m: 450,   perUser15m: 300 },   // most restrictive!
-  'GET /2/users/:id/tweets':     { perApp15m: 10000, perUser15m: 900 },
-  'GET /2/tweets/analytics':     { perApp15m: 300,   perUser15m: 300 },
-  'POST /2/tweets':              { perApp15m: 10000, perUser15m: 100 },
+  'GET /2/tweets': { perApp15m: 3500, perUser15m: 5000 },
+  'GET /2/tweets/:id': { perApp15m: 450, perUser15m: 900 },
+  'GET /2/tweets/search/recent': { perApp15m: 450, perUser15m: 300 }, // most restrictive!
+  'GET /2/users/:id/tweets': { perApp15m: 10000, perUser15m: 900 },
+  'GET /2/tweets/analytics': { perApp15m: 300, perUser15m: 300 },
+  'POST /2/tweets': { perApp15m: 10000, perUser15m: 100 },
   // Engagement endpoints
-  'GET /2/tweets/:id/liking_users':    { perApp15m: 75, perUser15m: 75 },
-  'GET /2/tweets/:id/retweeted_by':    { perApp15m: 75, perUser15m: 75 },
-  'GET /2/tweets/:id/quote_tweets':    { perApp15m: 75, perUser15m: 75 },
+  'GET /2/tweets/:id/liking_users': { perApp15m: 75, perUser15m: 75 },
+  'GET /2/tweets/:id/retweeted_by': { perApp15m: 75, perUser15m: 75 },
+  'GET /2/tweets/:id/quote_tweets': { perApp15m: 75, perUser15m: 75 },
 };
 
 // ─── Quota Tracking ─────────────────────────────────────────────────
 
 export interface QuotaState {
   monthlyReadsUsed: number;
-  monthlyReadsLimit: number;       // 15K for Basic
+  monthlyReadsLimit: number; // 15K for Basic
   monthlyWritesUsed: number;
-  monthlyWritesLimit: number;      // 50K for Basic
-  resetsAt: string;                // ISO 8601, first of next month
-  cacheHitRate: number;            // 0-1, target >= 0.8
+  monthlyWritesLimit: number; // 50K for Basic
+  resetsAt: string; // ISO 8601, first of next month
+  cacheHitRate: number; // 0-1, target >= 0.8
 }
 
 export type QuotaLevel = 'normal' | 'warning' | 'critical' | 'exhausted';

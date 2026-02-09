@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'ViralQuill — Viral Content Optimizer for X',
-  description: 'Optimize your X posts for maximum engagement using algorithm-aware scoring and AI rewriting.',
+  description:
+    'Optimize your X posts for maximum engagement using algorithm-aware scoring and AI rewriting.',
 };
 
 export default function RootLayout({

@@ -121,13 +121,13 @@ export interface JudgeRequest {
 }
 
 export interface JudgeResponse {
-  grammar: number;           // 1-5
+  grammar: number; // 1-5
   grammar_justification: string;
-  fluency: number;           // 1-5
+  fluency: number; // 1-5
   fluency_justification: string;
-  tone: number;              // 1-5
+  tone: number; // 1-5
   tone_justification: string;
-  overall: number;           // average of three
+  overall: number; // average of three
   critical_issues: string[];
   algorithm_signals_present: string[];
   suggestions: string[];

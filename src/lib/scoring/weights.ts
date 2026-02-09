@@ -20,7 +20,7 @@ export const DEFAULT_WEIGHTS: AlgorithmWeights = {
   conversationClick: 11, // Click to expand conversation
   dwellTime2min: 10, // User spends 2+ min on post
   bookmark: 10, // Save for later — strong intent signal
-  retweet: 1, // Repost (20x a like)
+  retweet: 20, // Repost (20x a like)
   like: 0.5, // Baseline engagement signal
 };
 
